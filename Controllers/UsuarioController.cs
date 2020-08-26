@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MySql.Data.MySqlClient;
+using Newtonsoft.Json;
 using ProjetoIntegrador4A.Model;
+
 
 namespace ProjetoIntegrador4A.Controllers
 {
@@ -13,24 +16,32 @@ namespace ProjetoIntegrador4A.Controllers
     [ApiController]
     public class UsuarioController : ControllerBase
     {
-        private static List<UsuarioModel> listaUsuarios = new List<UsuarioModel>();
         Conexao conexao = new Conexao();
         MySqlCommand cmd = new MySqlCommand();
-         
+                
         [AcceptVerbs("POST")]
+
+        //A ROTA FICARA ASSIM https://localhost:44360/api/Usuario/CadastrarUsuario
         [Route("CadastrarUsuario")]
-        public string CadastrarUsuario(UsuarioModel usuario)
+        public string CadastrarUsuario(Usuario usuario)
         {
             try
             {
+                //QUERY SQL
                 cmd.CommandText = "insert into usuario (id, nome, email, senha, token) values (@id, @nome, @email, @senha, @token)";
-                cmd.Parameters.AddWithValue("@id",4324343);
-                cmd.Parameters.AddWithValue("@nome","nome");
-                cmd.Parameters.AddWithValue("@email", "email");
-                cmd.Parameters.AddWithValue("@senha", "senha");
-                cmd.Parameters.AddWithValue("@token", "token");
+
+                //VINCULA O QUE FOI RECEBIDO NO WEBSERVICE EM BINDS PARA TROCAR NA QUERY
+                cmd.Parameters.AddWithValue("@id", usuario.Id);
+                cmd.Parameters.AddWithValue("@nome",usuario.Nome);
+                cmd.Parameters.AddWithValue("@email", usuario.Email);
+                cmd.Parameters.AddWithValue("@senha", usuario.Senha);
+                cmd.Parameters.AddWithValue("@token", usuario.Token);
+
+                //SE CONECTA NO BANCO
                 cmd.Connection = conexao.conectar();
+                //EXECUTA A QUERY
                 cmd.ExecuteNonQuery();
+                //DESCONECTA NO BANCO
                 conexao.desconectar();
 
                 return "Usuário cadastrado com sucesso!";
@@ -44,21 +55,8 @@ namespace ProjetoIntegrador4A.Controllers
 
         [AcceptVerbs("PUT")]
         [Route("AlterarUsuario")]
-        public string AlterarUsuario(UsuarioModel usuario)
+        public string AlterarUsuario(Usuario usuario)
         {
-
-            listaUsuarios.Where(n => n.Codigo == usuario.Codigo)
-                         .Select(s =>
-                         {
-                             s.Codigo = usuario.Codigo;
-                             s.Login = usuario.Login;
-                             s.Nome = usuario.Nome;
-
-                             return s;
-
-                         }).ToList();
-
-
 
             return "Usuário alterado com sucesso!";
         }
@@ -67,33 +65,58 @@ namespace ProjetoIntegrador4A.Controllers
         [Route("ExcluirUsuario/{codigo}")]
         public string ExcluirUsuario(int codigo)
         {
-
-            UsuarioModel usuario = listaUsuarios.Where(n => n.Codigo == codigo)
-                                                .Select(n => n)
-                                                .First();
-
-            listaUsuarios.Remove(usuario);
-
             return "Registro excluido com sucesso!";
         }
 
         [AcceptVerbs("GET")]
         [Route("ConsultarUsuarioPorCodigo/{codigo}")]
-        public UsuarioModel ConsultarUsuarioPorCodigo(int codigo)
+        public void ConsultarUsuarioPorCodigo(int codigo)
         {
-
-            UsuarioModel usuario = listaUsuarios.Where(n => n.Codigo == codigo)
-                                                .Select(n => n)
-                                                .FirstOrDefault();
-
-            return usuario;
+            return ;
         }
 
         [AcceptVerbs("GET")]
         [Route("ConsultarUsuarios")]
-        public List<UsuarioModel> ConsultarUsuarios()
+        public String ConsultarUsuarios()
         {
-            return listaUsuarios;
+            try
+            {
+                List<Usuario> users = new List<Usuario>();
+                int varint = 0;
+                cmd.CommandText = "SELECT * FROM usuario ORDER BY ID DESC";
+                cmd.Connection = conexao.conectar();
+                MySqlDataReader reader = cmd.ExecuteReader();
+
+                if (reader.Read() == false)
+                {
+                    throw new Exception("resultado vazio");
+                }
+
+                while (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        varint++;
+                        //users.Add(new Usuario(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetString(4)));
+                    }
+
+                    reader.NextResult();
+                }
+                return varint.ToString();
+                //return JsonConvert.SerializeObject(users, Formatting.Indented);
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                conexao.desconectar();
+            }
+
+            return "Usuário cadastrado com sucesso!";
+
         }
     }
 }

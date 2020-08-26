@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "xqwuKfX3pa5aaFcvseT47RX1UyULI5mwsOk93SV+fTQ4Nt/OuUFtjEm+HtIrYL2wXA5xxs/PwUqKAUFu/F1LIw==",
+  "dgSpecHash": "PXWCDcbTwYlySctNs0qfTDSdUd5Xt1BD3Gquh/plredJA3A1S4El43E0vZoUwX0IpY89im5vBOcV/wrQnDynVA==",
   "success": true,
   "projectFilePath": "C:\\Users\\Home\\Documents\\www\\ProjetoIntegrador4A\\ProjetoIntegrador4A.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\Home\\.nuget\\packages\\mysqlconnector\\0.43.0\\mysqlconnector.0.43.0.nupkg.sha512"
+    "C:\\Users\\Home\\.nuget\\packages\\mysqlconnector\\0.43.0\\mysqlconnector.0.43.0.nupkg.sha512",
+    "C:\\Users\\Home\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512"
   ],
   "logs": []
 }
