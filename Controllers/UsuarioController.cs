@@ -4,8 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MySql.Data.MySqlClient;
 using ProjetoIntegrador4A.Model;
-
 
 namespace ProjetoIntegrador4A.Controllers
 {
@@ -14,15 +14,35 @@ namespace ProjetoIntegrador4A.Controllers
     public class UsuarioController : ControllerBase
     {
         private static List<UsuarioModel> listaUsuarios = new List<UsuarioModel>();
-
+        Conexao conexao = new Conexao();
+        MySqlCommand cmd = new MySqlCommand();
+         
         [AcceptVerbs("POST")]
         [Route("CadastrarUsuario")]
         public string CadastrarUsuario(UsuarioModel usuario)
         {
+            try
+            {
+             
+                cmd.CommandText = "insert into usuario (id, nome, email, senha, token) values (@id, @nome, @email, @senha, @token)";
+                cmd.Parameters.AddWithValue("@id",4324343);
+                cmd.Parameters.AddWithValue("@nome","nome");
+                cmd.Parameters.AddWithValue("@email", "email");
+                cmd.Parameters.AddWithValue("@senha", "senha");
+                cmd.Parameters.AddWithValue("@token", "token");
+                cmd.Connection = conexao.conectar();
+                cmd.ExecuteNonQuery();
+                conexao.desconectar();
 
-            listaUsuarios.Add(usuario);
+                return "Usuário cadastrado com sucesso!";
+            }
+            catch (Exception e)
+            {
+                return e.Message;
+            }
 
-            return "Usuário cadastrado com sucesso!";
+
+            
         }
 
         [AcceptVerbs("PUT")]
