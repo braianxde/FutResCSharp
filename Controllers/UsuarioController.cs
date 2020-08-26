@@ -37,6 +37,8 @@ namespace ProjetoIntegrador4A.Controllers
                 cmd.Parameters.AddWithValue("@senha", usuario.Senha);
                 cmd.Parameters.AddWithValue("@token", usuario.Token);
 
+                //AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+
                 //SE CONECTA NO BANCO
                 cmd.Connection = conexao.conectar();
                 //EXECUTA A QUERY
@@ -86,7 +88,7 @@ namespace ProjetoIntegrador4A.Controllers
 
         [AcceptVerbs("DELETE")]
         [Route("ExcluirUsuario/{id}")]
-        public string ExcluirUsuario(string Id)
+        public string ExcluirUsuario(int Id)
         {
             try
             {
