@@ -23,7 +23,6 @@ namespace ProjetoIntegrador4A.Controllers
         {
             try
             {
-             
                 cmd.CommandText = "insert into usuario (id, nome, email, senha, token) values (@id, @nome, @email, @senha, @token)";
                 cmd.Parameters.AddWithValue("@id",4324343);
                 cmd.Parameters.AddWithValue("@nome","nome");
@@ -40,9 +39,7 @@ namespace ProjetoIntegrador4A.Controllers
             {
                 return e.Message;
             }
-
-
-            
+          
         }
 
         [AcceptVerbs("PUT")]
