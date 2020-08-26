@@ -87,23 +87,18 @@ namespace ProjetoIntegrador4A.Controllers
                 cmd.Connection = conexao.conectar();
                 MySqlDataReader reader = cmd.ExecuteReader();
 
-                if (reader.Read() == false)
-                {
-                    throw new Exception("resultado vazio");
-                }
-
                 while (reader.HasRows)
                 {
                     while (reader.Read())
                     {
                         varint++;
-                        //users.Add(new Usuario(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetString(4)));
+                        users.Add(new Usuario(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetString(4)));
                     }
 
                     reader.NextResult();
                 }
-                return varint.ToString();
-                //return JsonConvert.SerializeObject(users, Formatting.Indented);
+                
+                return JsonConvert.SerializeObject(users, Formatting.Indented);
 
             }
             catch (Exception ex)
