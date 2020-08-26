@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "S0c227ZW6ffQCKbLLIuB9oeJrw72pKtXljmcpSsPmstLQ8HiATno1uWRa0A1jcWhLioS2hy+DbzCHO9O2T2AFQ==",
+  "dgSpecHash": "xqwuKfX3pa5aaFcvseT47RX1UyULI5mwsOk93SV+fTQ4Nt/OuUFtjEm+HtIrYL2wXA5xxs/PwUqKAUFu/F1LIw==",
   "success": true,
   "projectFilePath": "C:\\Users\\Home\\Documents\\www\\ProjetoIntegrador4A\\ProjetoIntegrador4A.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\Home\\.nuget\\packages\\mysqlconnector\\0.43.0\\mysqlconnector.0.43.0.nupkg.sha512"
+  ],
   "logs": []
 }
