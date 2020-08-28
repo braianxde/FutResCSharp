@@ -23,6 +23,7 @@ namespace ProjetoIntegrador4A.Controllers
         [AcceptVerbs("POST")]
 
         //A ROTA FICARA ASSIM https://localhost:44360/api/Usuario/CadastrarUsuario
+        //OLA 
         [Route("CadastrarUsuario")]
         public string CadastrarUsuario(Usuario usuario)
         {
