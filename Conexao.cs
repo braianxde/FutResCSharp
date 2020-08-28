@@ -8,6 +8,7 @@ namespace ProjetoIntegrador4A
 {
     public class Conexao
     {
+        //alo
         MySqlConnection con = new MySqlConnection();
         public Conexao()
         {
@@ -20,7 +21,6 @@ namespace ProjetoIntegrador4A
             {
                 con.Open();
             }
-
             return con;
         }
 
