@@ -13,6 +13,7 @@ using ProjetoIntegrador4A.Model;
 namespace ProjetoIntegrador4A.Controllers
 {
     [Route("api/[controller]")]
+
     [ApiController]
     public class UsuarioController : ControllerBase
     {
@@ -36,8 +37,6 @@ namespace ProjetoIntegrador4A.Controllers
                 cmd.Parameters.AddWithValue("@email", usuario.Email);
                 cmd.Parameters.AddWithValue("@senha", usuario.Senha);
                 cmd.Parameters.AddWithValue("@token", usuario.Token);
-
-                //AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 
                 //SE CONECTA NO BANCO
                 cmd.Connection = conexao.conectar();
@@ -131,7 +130,7 @@ namespace ProjetoIntegrador4A.Controllers
                     while (reader.Read())
                     {
                         varint++;
-                        users.Add(new Usuario(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetString(4)));
+                        users.Add(new Usuario(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetString(4), reader.GetInt32(5)));
                     }
 
                     reader.NextResult();
@@ -161,7 +160,6 @@ namespace ProjetoIntegrador4A.Controllers
             try
             {
                 List<Usuario> users = new List<Usuario>();
-                int varint = 0;
                 cmd.CommandText = "SELECT * FROM usuario";
                 cmd.Connection = conexao.conectar();
                 MySqlDataReader reader = cmd.ExecuteReader();
@@ -170,8 +168,7 @@ namespace ProjetoIntegrador4A.Controllers
                 {
                     while (reader.Read())
                     {
-                        varint++;
-                        users.Add(new Usuario(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetString(4)));
+                        users.Add(new Usuario(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetString(4), reader.GetInt32(5)));
                     }
 
                     reader.NextResult();

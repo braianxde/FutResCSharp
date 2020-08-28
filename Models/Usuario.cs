@@ -12,18 +12,20 @@ namespace ProjetoIntegrador4A.Model
         private string email;
         private string senha;
         private string token;
+        private int contador;
 
         public Usuario()
         {
         }
 
-        public Usuario(int id, string nome, string email, string senha, string token)
+        public Usuario(int id, string nome, string email, string senha, string token, int contador)
         {
             this.id = id;
             this.nome = nome;
             this.email = email;
             this.senha = senha;
             this.token = token;
+            this.contador = contador;
         }
 
         public int Id
@@ -36,6 +38,19 @@ namespace ProjetoIntegrador4A.Model
             set
             {
                 id = value;
+            }
+        }
+
+        public int Contador
+        {
+            get
+            {
+                return contador;
+            }
+
+            set
+            {
+                contador = value;
             }
         }
 
