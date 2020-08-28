@@ -8,7 +8,6 @@ namespace ProjetoIntegrador4A
 {
     public class Conexao
     {
-        //alo
         MySqlConnection con = new MySqlConnection();
         public Conexao()
         {
