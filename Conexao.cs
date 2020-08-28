@@ -13,7 +13,7 @@ namespace ProjetoIntegrador4A
         {
             con.ConnectionString = "server=localhost;user id=root;password=Braian123456;persistsecurityinfo=True;database=projetointegrador4a";
         }
-        //AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        //AAAAAAAAAAAAAAAAA
         public MySqlConnection conectar()
         {
             if (con.State == System.Data.ConnectionState.Closed)
