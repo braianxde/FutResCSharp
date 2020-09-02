@@ -18,13 +18,8 @@ namespace ProjetoIntegrador4A.Controllers
     public class UsuarioController : ControllerBase
     {
         Conexao conexao = new Conexao();
-<<<<<<< HEAD
         MySqlCommand cmd = new MySqlCommand();  
-                
-=======
-        MySqlCommand cmd = new MySqlCommand();
-
->>>>>>> c84b0bc21b55721c445237dd30c1c7560f3b3d9a
+           
         [AcceptVerbs("POST")]
 
         //A ROTA FICARA ASSIM https://localhost:44360/api/Usuario/CadastrarUsuario
