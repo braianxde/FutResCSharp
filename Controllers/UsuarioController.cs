@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using MySql.Data.MySqlClient;
 using Newtonsoft.Json;
 using ProjetoIntegrador4A.Model;
-
+using ProjetoIntegrador4A.Models;
 
 namespace ProjetoIntegrador4A.Controllers
 {
@@ -18,8 +18,13 @@ namespace ProjetoIntegrador4A.Controllers
     public class UsuarioController : ControllerBase
     {
         Conexao conexao = new Conexao();
+<<<<<<< HEAD
         MySqlCommand cmd = new MySqlCommand();  
                 
+=======
+        MySqlCommand cmd = new MySqlCommand();
+
+>>>>>>> c84b0bc21b55721c445237dd30c1c7560f3b3d9a
         [AcceptVerbs("POST")]
 
         //A ROTA FICARA ASSIM https://localhost:44360/api/Usuario/CadastrarUsuario
@@ -34,7 +39,7 @@ namespace ProjetoIntegrador4A.Controllers
 
                 //VINCULA O QUE FOI RECEBIDO NO WEBSERVICE EM BINDS PARA TROCAR NA QUERY
                 cmd.Parameters.AddWithValue("@id", usuario.Id);
-                cmd.Parameters.AddWithValue("@nome",usuario.Nome);
+                cmd.Parameters.AddWithValue("@nome", usuario.Nome);
                 cmd.Parameters.AddWithValue("@email", usuario.Email);
                 cmd.Parameters.AddWithValue("@senha", usuario.Senha);
                 cmd.Parameters.AddWithValue("@token", usuario.Token);
@@ -52,7 +57,7 @@ namespace ProjetoIntegrador4A.Controllers
             {
                 return e.Message;
             }
-          
+
         }
 
         [AcceptVerbs("PUT")]
@@ -96,7 +101,7 @@ namespace ProjetoIntegrador4A.Controllers
                 cmd.CommandText = "delete from usuario where id = @id";
 
                 //VINCULA O QUE FOI RECEBIDO NO WEBSERVICE EM BINDS PARA TROCAR NA QUERY
-                cmd.Parameters.AddWithValue("@id",Id);
+                cmd.Parameters.AddWithValue("@id", Id);
 
                 //SE CONECTA NO BANCO
                 cmd.Connection = conexao.conectar();
@@ -153,7 +158,7 @@ namespace ProjetoIntegrador4A.Controllers
             return "Nenhum usuario encontrado";
 
         }
-
+        
         [AcceptVerbs("GET")]
         [Route("ConsultarUsuarios")]
         public String ConsultarUsuarios()
@@ -189,6 +194,47 @@ namespace ProjetoIntegrador4A.Controllers
             }
 
             return "Nenhum usuario encontrado";
+
+        }
+        //Evandro 30.08-Inserido Novo metodo mas em teste, preciso retornar atributos de apenas um item da tabela
+
+        [AcceptVerbs("GET")]
+        [Route("Consultarclubes")]
+        public String Consultarclubes()
+        {
+            try
+            {
+                List<clube> clubers = new List<clube>();
+                cmd.CommandText = "SELECT *FROM clube ";
+                cmd.Connection = conexao.conectar();
+                MySqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        clubers.Add(new clube(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetInt32(3), reader.GetInt32(4), reader.GetInt32(5), reader.GetInt32(6), reader.GetInt32(7), reader.GetInt32(8), reader.GetString(9), reader.GetString(10)));
+                    }
+
+                    reader.NextResult();
+                }
+
+                reader.Close();
+                return JsonConvert.SerializeObject(clubers, Formatting.Indented);
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                conexao.desconectar();
+            }
+
+            return "Nenhum clube encontrado";
+
+
 
         }
     }
