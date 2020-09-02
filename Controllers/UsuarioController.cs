@@ -18,7 +18,7 @@ namespace ProjetoIntegrador4A.Controllers
     public class UsuarioController : ControllerBase
     {
         Conexao conexao = new Conexao();
-        MySqlCommand cmd = new MySqlCommand();
+        MySqlCommand cmd = new MySqlCommand();  
                 
         [AcceptVerbs("POST")]
 
