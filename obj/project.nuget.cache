@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "PXWCDcbTwYlySctNs0qfTDSdUd5Xt1BD3Gquh/plredJA3A1S4El43E0vZoUwX0IpY89im5vBOcV/wrQnDynVA==",
+  "dgSpecHash": "wnP4of2Ac7ChREhZBBsgguFjpFqurSkvwmoM3p5MDSY5zTIQJeCYkAkvpOZ2TQzE2xzOiNqZ7emzB5HC2DKTbw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Home\\Documents\\www\\ProjetoIntegrador4A\\ProjetoIntegrador4A.csproj",
+  "projectFilePath": "C:\\Users\\Marcio\\Documents\\Aula\\FutRes\\projeto2\\ProjetoIntegrador4A.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\Home\\.nuget\\packages\\mysqlconnector\\0.43.0\\mysqlconnector.0.43.0.nupkg.sha512",
-    "C:\\Users\\Home\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512"
+    "C:\\Users\\Marcio\\.nuget\\packages\\mysqlconnector\\0.43.0\\mysqlconnector.0.43.0.nupkg.sha512",
+    "C:\\Users\\Marcio\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512",
+    "C:\\Users\\Marcio\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\3.1.2\\microsoft.aspnetcore.app.ref.3.1.2.nupkg.sha512"
   ],
   "logs": []
 }
