@@ -11,7 +11,7 @@ namespace ProjetoIntegrador4A
         MySqlConnection con = new MySqlConnection();
         public Conexao()
         {
-            con.ConnectionString = "server=localhost;user id=root;password=Braian123456;persistsecurityinfo=True;database=projetointegrador4a";
+            con.ConnectionString = "server=localhost;user id=root;password=Evandro2302a1eja1ej;persistsecurityinfo=True;database=projetointegrador4a";
         }
         //AAAAAAAAAAAAAAAAA
         public MySqlConnection conectar()

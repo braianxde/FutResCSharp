@@ -21,3 +21,26 @@ C:\Users\Home\Documents\www\ProjetoIntegrador4A\obj\Debug\netcoreapp3.1\ProjetoI
 C:\Users\Home\Documents\www\ProjetoIntegrador4A\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
 C:\Users\Home\Documents\www\ProjetoIntegrador4A\obj\Debug\netcoreapp3.1\ProjetoIntegrador4A.csproj.CoreCompileInputs.cache
 C:\Users\Home\Documents\www\ProjetoIntegrador4A\obj\Debug\netcoreapp3.1\ProjetoIntegrador4A.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\evand\Desktop\Ultima versao pi4\bin\Debug\netcoreapp3.1\appsettings.Development.json
+C:\Users\evand\Desktop\Ultima versao pi4\bin\Debug\netcoreapp3.1\appsettings.json
+C:\Users\evand\Desktop\Ultima versao pi4\bin\Debug\netcoreapp3.1\Properties\launchSettings.json
+C:\Users\evand\Desktop\Ultima versao pi4\bin\Debug\netcoreapp3.1\ProjetoIntegrador4A.exe
+C:\Users\evand\Desktop\Ultima versao pi4\bin\Debug\netcoreapp3.1\ProjetoIntegrador4A.deps.json
+C:\Users\evand\Desktop\Ultima versao pi4\bin\Debug\netcoreapp3.1\ProjetoIntegrador4A.runtimeconfig.json
+C:\Users\evand\Desktop\Ultima versao pi4\bin\Debug\netcoreapp3.1\ProjetoIntegrador4A.runtimeconfig.dev.json
+C:\Users\evand\Desktop\Ultima versao pi4\bin\Debug\netcoreapp3.1\ProjetoIntegrador4A.dll
+C:\Users\evand\Desktop\Ultima versao pi4\bin\Debug\netcoreapp3.1\ProjetoIntegrador4A.pdb
+C:\Users\evand\Desktop\Ultima versao pi4\bin\Debug\netcoreapp3.1\MySqlConnector.dll
+C:\Users\evand\Desktop\Ultima versao pi4\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+C:\Users\evand\Desktop\Ultima versao pi4\obj\Debug\netcoreapp3.1\ProjetoIntegrador4A.csprojAssemblyReference.cache
+C:\Users\evand\Desktop\Ultima versao pi4\obj\Debug\netcoreapp3.1\ProjetoIntegrador4A.AssemblyInfoInputs.cache
+C:\Users\evand\Desktop\Ultima versao pi4\obj\Debug\netcoreapp3.1\ProjetoIntegrador4A.AssemblyInfo.cs
+C:\Users\evand\Desktop\Ultima versao pi4\obj\Debug\netcoreapp3.1\ProjetoIntegrador4A.csproj.CoreCompileInputs.cache
+C:\Users\evand\Desktop\Ultima versao pi4\obj\Debug\netcoreapp3.1\ProjetoIntegrador4A.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\evand\Desktop\Ultima versao pi4\obj\Debug\netcoreapp3.1\ProjetoIntegrador4A.RazorTargetAssemblyInfo.cache
+C:\Users\evand\Desktop\Ultima versao pi4\obj\Debug\netcoreapp3.1\ProjetoIntegrador4A.csproj.CopyComplete
+C:\Users\evand\Desktop\Ultima versao pi4\obj\Debug\netcoreapp3.1\staticwebassets\ProjetoIntegrador4A.StaticWebAssets.Manifest.cache
+C:\Users\evand\Desktop\Ultima versao pi4\obj\Debug\netcoreapp3.1\staticwebassets\ProjetoIntegrador4A.StaticWebAssets.xml
+C:\Users\evand\Desktop\Ultima versao pi4\obj\Debug\netcoreapp3.1\ProjetoIntegrador4A.dll
+C:\Users\evand\Desktop\Ultima versao pi4\obj\Debug\netcoreapp3.1\ProjetoIntegrador4A.pdb
+C:\Users\evand\Desktop\Ultima versao pi4\obj\Debug\netcoreapp3.1\ProjetoIntegrador4A.genruntimeconfig.cache
