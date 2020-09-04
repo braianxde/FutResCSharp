@@ -25,13 +25,14 @@ namespace ProjetoIntegrador4A.Controllers
         {
             try
             {
-                cmd.CommandText = "insert into gol (tempo, minuto, gol_contra, id_jogador, id_partida) values (@tempo, @minuto, @gol_contra, @id_jogador, @id_partida)";
+                cmd.CommandText = "insert into gol (id, tempo, minuto, gol_contra, id_jogador, id_partida) values (@id, @tempo, @minuto, @gol_contra, @id_jogador, @id_partida)";
 
-                cmd.Parameters.AddWithValue("@tempo", gol.tempo);
-                cmd.Parameters.AddWithValue("@minuto", gol.minuto);
-                cmd.Parameters.AddWithValue("@gol_contra", gol.gol_contra);
-                cmd.Parameters.AddWithValue("@id_jogador", gol.id_jogador);
-                cmd.Parameters.AddWithValue("@id_partida", gol.id_partida);
+                cmd.Parameters.AddWithValue("@id", gol.Id);
+                cmd.Parameters.AddWithValue("@tempo", gol.Tempo);
+                cmd.Parameters.AddWithValue("@minuto", gol.Minuto);
+                cmd.Parameters.AddWithValue("@gol_contra", gol.Gol_contra);
+                cmd.Parameters.AddWithValue("@id_jogador", gol.Id_jogador);
+                cmd.Parameters.AddWithValue("@id_partida", gol.Id_partida);
 
                 cmd.Connection = conexao.conectar();
 
@@ -65,7 +66,7 @@ namespace ProjetoIntegrador4A.Controllers
                     while (reader.Read())
                     {
                         varint++;
-                        gols.Add(new gol(reader.GetInt32(0), reader.GetInt32(1), reader.GetInt32(2), reader.GetBoolean(3), reader.GetInt32(4), reader.GetInt32(5)));
+                        gols.Add(new gol(reader.GetInt32(0), reader.GetInt32(1), reader.GetInt32(2), reader.GetInt32(3), reader.GetInt32(4), reader.GetInt32(5)));
                     }
                     reader.NextResult();
                 }
