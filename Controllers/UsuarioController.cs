@@ -15,6 +15,7 @@ namespace ProjetoIntegrador4A.Controllers
     [Route("api/[controller]")]
 
     [ApiController]
+    //adicionadoComentario
     public class UsuarioController : ControllerBase
     {
         Conexao conexao = new Conexao();
