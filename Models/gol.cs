@@ -7,7 +7,18 @@ namespace ProjetoIntegrador4A.Models
 {
     public class gol
     {
-        public gol(int id, int tempo, int minuto, bool gol_contra, int id_jogador, int id_partida)
+            private int id;
+            private int tempo;
+            private int minuto;
+            private int gol_contra;
+            private int id_jogador;
+            private int id_partida;
+            
+            public gol ()
+            {
+            }
+        
+        public gol(int id, int tempo, int minuto, int gol_contra, int id_jogador, int id_partida)
         {
             this.id = id;
             this.tempo = tempo;
@@ -17,11 +28,11 @@ namespace ProjetoIntegrador4A.Models
             this.id_partida = id_partida;
         }
 
-        public int id { get; set; }
-        public int tempo { get; set; }
-        public int minuto { get; set; }
-        public Boolean gol_contra { get; set; }
-        public int id_jogador { get; set; }
-        public int id_partida { get; set; }
+        public int Id { get { return id; } set { id = value; }  }
+        public int Tempo { get { return tempo; } set { tempo = value; } }
+        public int Minuto { get { return minuto; } set { minuto = value; } }
+        public int Gol_contra { get { return gol_contra; } set { gol_contra = value; } }
+        public int Id_jogador { get { return id_jogador; } set { id_jogador = value; } }
+        public int Id_partida { get { return id_partida; } set { id_partida = value; } }
     }
 }
