@@ -66,7 +66,7 @@ namespace ProjetoIntegrador4A.Controllers
                     while (reader.Read())
                     {
                         varint++;
-                        partidas.Add(new partida(reader.GetInt32(0), reader.GetString(1), reader.GetInt32(2), reader.GetInt32(3), reader.GetInt32(4), reader.GetString(5), reader.GetString(6), reader.GetString(7), reader.GetString(8)));
+                        partidas.Add(new partida(reader.GetInt32(0), reader.GetDateTime(1).ToString("dd/mm/yyyy hh:mm:ss"), reader.GetInt32(2), reader.GetInt32(3), reader.GetInt32(4), reader.GetString(5), reader.GetString(6), reader.GetString(7), reader.GetString(8)));
                     }
                     reader.NextResult();
                 }
