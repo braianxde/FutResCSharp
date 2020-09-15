@@ -31,14 +31,17 @@ namespace ProjetoIntegrador4A.Controllers
             try
             {
                 //QUERY SQL
-                cmd.CommandText = "insert into usuario (id, nome, email, senha, token) values (@id, @nome, @email, @senha, @token)";
+                cmd.CommandText = "insert into usuario (id, nome, email, senha, token, contador) values (@id, @nome, @email, @senha, @token, 0)";
 
                 //VINCULA O QUE FOI RECEBIDO NO WEBSERVICE EM BINDS PARA TROCAR NA QUERY
                 cmd.Parameters.AddWithValue("@id", usuario.Id);
                 cmd.Parameters.AddWithValue("@nome", usuario.Nome);
                 cmd.Parameters.AddWithValue("@email", usuario.Email);
                 cmd.Parameters.AddWithValue("@senha", usuario.Senha);
-                cmd.Parameters.AddWithValue("@token", usuario.Token);
+
+                var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(usuario.Nome + usuario.Email + usuario.Senha);
+                
+                cmd.Parameters.AddWithValue("@token", System.Convert.ToBase64String(plainTextBytes).Substring(0, 49));
 
                 //SE CONECTA NO BANCO
                 cmd.Connection = conexao.conectar();
@@ -48,6 +51,51 @@ namespace ProjetoIntegrador4A.Controllers
                 conexao.desconectar();
 
                 return "Usuário cadastrado com sucesso!";
+            }
+            catch (Exception e)
+            {
+                return e.Message;
+            }
+
+        }
+
+        [Route("Logar")]
+        public string Logar(Usuario usuario)
+        {
+            try
+            {
+
+                cmd.CommandText = "SELECT token, contador FROM usuario where email = @email and senha = @senha";
+                cmd.Parameters.AddWithValue("@senha", usuario.Senha);
+                cmd.Parameters.AddWithValue("@email", usuario.Email);
+                cmd.Connection = conexao.conectar();
+                MySqlDataReader reader = cmd.ExecuteReader();
+                var token = "";
+                var cont = 0;
+                while (reader.Read())
+                {
+                    if (reader.GetString(0) != null)
+                    {
+                        token = reader.GetString(0);
+                        cont = reader.GetInt16(1);
+                    }
+                }
+                reader.Close();
+
+
+                if (token != "") {
+                    
+                    cont += 1;
+
+                    cmd.CommandText = "update usuario set contador = @contador where token = @token";
+                    cmd.Parameters.AddWithValue("@token", token);
+                    cmd.Parameters.AddWithValue("@contador", cont);
+                    cmd.Connection = conexao.conectar();
+                    cmd.ExecuteNonQuery();
+                    conexao.desconectar();
+                }
+
+                return token;
             }
             catch (Exception e)
             {
@@ -161,8 +209,15 @@ namespace ProjetoIntegrador4A.Controllers
         {
             try
             {
+                bool sessao = this.validaSessao();
+
+                if (!sessao)
+                {
+                    return "Usuario nao esta logado";
+                }
+
                 List<Usuario> users = new List<Usuario>();
-                cmd.CommandText = "SELECT * FROM usuario";
+                cmd.CommandText = "SELECT id, nome, email, senha, token, contador FROM usuario";
                 cmd.Connection = conexao.conectar();
                 MySqlDataReader reader = cmd.ExecuteReader();
 
@@ -230,8 +285,35 @@ namespace ProjetoIntegrador4A.Controllers
 
             return "Nenhum clube encontrado";
 
+        }
 
+        public bool validaSessao()
+        {
+            string authHeader = this.Request.Headers["Authorization"];
 
+            if (authHeader != "")
+            {
+                cmd.CommandText = "SELECT nome FROM usuario where token = @token";
+                cmd.Parameters.AddWithValue("@token", authHeader);
+                cmd.Connection = conexao.conectar();
+                MySqlDataReader reader = cmd.ExecuteReader();
+
+                string usuario = "";
+
+                while (reader.Read())
+                {
+                    usuario = reader.GetString(0);
+                }
+                reader.Close();
+
+                if (usuario != "")
+                {
+                    return true;
+                }
+
+            }
+
+            return false;
         }
     }
 }
