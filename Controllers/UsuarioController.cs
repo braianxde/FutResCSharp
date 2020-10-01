@@ -94,8 +94,9 @@ namespace ProjetoIntegrador4A.Controllers
                     cmd.ExecuteNonQuery();
                     conexao.desconectar();
                 }
+                string[] tokenArray = { token };
 
-                return token;
+                return JsonConvert.SerializeObject(tokenArray, Formatting.Indented);
             }
             catch (Exception e)
             {
