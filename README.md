@@ -1,6 +1,6 @@
-Projeto em C# feito no curso de Analise de Desenvolvimento de Sistemas na Universidade de Santa Cruz do Sul (UNISC)
+Projeto em C# feito no curso de Análise de Desenvolvimento de Sistemas na Universidade de Santa Cruz do Sul (UNISC)
 
-Este projeto consiste em uma API com dados do Brasileirao como Classificacao, Rodadas, Clubes...
+Este projeto consiste em uma API com dados do Brasileirão como Classificação, Rodadas, Clubes...
 
 Projeto feito por:
 * MARCIO LUIZ BECKER
