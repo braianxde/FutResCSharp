@@ -30,6 +30,12 @@ namespace ProjetoIntegrador4A.Controllers
         {
             try
             {
+                bool sessao = this.validaSessao(this.Request.Headers["Authorization"]);
+
+                if (!sessao)
+                {
+                    return "Usuario nao esta logado";
+                }
                 //QUERY SQL
                 cmd.CommandText = "insert into usuario (id, nome, email, senha, token, contador) values (@id, @nome, @email, @senha, @token, 0)";
 
@@ -111,6 +117,14 @@ namespace ProjetoIntegrador4A.Controllers
         {
             try
             {
+
+                bool sessao = this.validaSessao(this.Request.Headers["Authorization"]);
+
+                if (!sessao)
+                {
+                    return "Usuario nao esta logado";
+                }
+
                 //QUERY SQL
                 cmd.CommandText = "update usuario set nome = @nome, email = @email, senha = @senha, token = @token where id = @id";
 
@@ -142,6 +156,14 @@ namespace ProjetoIntegrador4A.Controllers
         {
             try
             {
+
+                bool sessao = this.validaSessao(this.Request.Headers["Authorization"]);
+
+                if (!sessao)
+                {
+                    return "Usuario nao esta logado";
+                }
+
                 //QUERY SQL
                 cmd.CommandText = "delete from usuario where id = @id";
 
@@ -169,6 +191,13 @@ namespace ProjetoIntegrador4A.Controllers
         {
             try
             {
+                bool sessao = this.validaSessao(this.Request.Headers["Authorization"]);
+
+                if (!sessao)
+                {
+                    return "Usuario nao esta logado";
+                }
+
                 List<Usuario> users = new List<Usuario>();
                 int varint = 0;
                 cmd.CommandText = "SELECT * FROM usuario where id = @id";
@@ -210,7 +239,7 @@ namespace ProjetoIntegrador4A.Controllers
         {
             try
             {
-                bool sessao = this.validaSessao();
+                bool sessao = this.validaSessao(this.Request.Headers["Authorization"]);
 
                 if (!sessao)
                 {
@@ -288,10 +317,8 @@ namespace ProjetoIntegrador4A.Controllers
 
         }
 
-        public bool validaSessao()
+        public bool validaSessao( string authHeader)
         {
-            string authHeader = this.Request.Headers["Authorization"];
-
             if (authHeader != "")
             {
                 cmd.CommandText = "SELECT nome FROM usuario where token = @token";

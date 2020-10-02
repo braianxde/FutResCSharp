@@ -17,17 +17,20 @@ namespace ProjetoIntegrador4A.Controllers
         Conexao conexao = new Conexao();
         MySqlCommand cmd = new MySqlCommand();
 
-
-
-        //Retorna a lista de times de forma ascendente
-        // https://localhost:44360/api/clube/Listarclubes
-
         [AcceptVerbs("GET")]
         [Route("Listarclubes")]
         public String Listarclubes()
         {
             try
             {
+                UsuarioController user = new UsuarioController();
+                bool sessao = user.validaSessao(this.Request.Headers["Authorization"]);
+
+                if (!sessao)
+                {
+                    return "Usuario nao esta logado";
+                }
+
                 List<clube> clubers = new List<clube>();
                 cmd.CommandText = "select * from clube order by pontos desc, vitorias desc, empates desc, derrotas desc, (gols_pro-gols_contra) desc";
                 cmd.Connection = conexao.conectar();
@@ -52,7 +55,6 @@ namespace ProjetoIntegrador4A.Controllers
             {
                 conexao.desconectar();
             }
-            return "Nenhum clube encontrado";
         }
 
         [AcceptVerbs("PUT")]
@@ -60,7 +62,16 @@ namespace ProjetoIntegrador4A.Controllers
         public string AtualizaClube(clube clube)
         {
             try
-            {           
+            {
+
+                UsuarioController user = new UsuarioController();
+                bool sessao = user.validaSessao(this.Request.Headers["Authorization"]);
+
+                if (!sessao)
+                {
+                    return "Usuario nao esta logado";
+                }
+
                 cmd.CommandText = " update clube set pontos = @pontos, vitorias = @vitorias, derrotas = @derrotas, empates = @empates, gols_pro = @gols_pro, gols_contra = @gols_contra, nome_tecnico = @nome_tecnico where id = @id";
 
                 cmd.Parameters.AddWithValue("@id", clube.Id);
@@ -81,7 +92,6 @@ namespace ProjetoIntegrador4A.Controllers
             }
             catch (Exception e)
             {
-
                 return e.Message;
             }
         }

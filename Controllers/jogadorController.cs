@@ -24,6 +24,14 @@ namespace ProjetoIntegrador4A.Controllers
         {
             try
             {
+                UsuarioController user = new UsuarioController();
+                bool sessao = user.validaSessao(this.Request.Headers["Authorization"]);
+
+                if (!sessao)
+                {
+                    return "Usuario nao esta logado";
+                }
+
                 cmd.CommandText = "insert into jogador (id, nome, id_clube) values (@id, @nome, @id_clube)";
 
                 cmd.Parameters.AddWithValue("@id", jogador.Id);
@@ -50,6 +58,14 @@ namespace ProjetoIntegrador4A.Controllers
         {
             try
             {
+                UsuarioController user = new UsuarioController();
+                bool sessao = user.validaSessao(this.Request.Headers["Authorization"]);
+
+                if (!sessao)
+                {
+                    return "Usuario nao esta logado";
+                }
+
                 List<jogador> jogadores = new List<jogador>();
                 int varint = 0;
                 cmd.CommandText = "SELECT * FROM jogador where id_clube = @id_clube";
@@ -78,8 +94,6 @@ namespace ProjetoIntegrador4A.Controllers
             {
                 conexao.desconectar();
             }
-            return "Partida sem gols!";
-
         }
 
     }   

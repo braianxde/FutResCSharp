@@ -24,6 +24,14 @@ namespace ProjetoIntegrador4A.Controllers
         {
             try
             {
+                UsuarioController user = new UsuarioController();
+                bool sessao = user.validaSessao(this.Request.Headers["Authorization"]);
+
+                if (!sessao)
+                {
+                    return "Usuario nao esta logado";
+                }
+
                 MySqlCommand cmd2 = new MySqlCommand();
                 cmd2.Connection = conexao.conectar();
 
@@ -34,8 +42,8 @@ namespace ProjetoIntegrador4A.Controllers
                 cmd2.Parameters.AddWithValue("@id_mandante", partida.Id_mandante);
                 cmd2.Parameters.AddWithValue("@id_visitante", partida.Id_visitante);
                 cmd2.Parameters.AddWithValue("@id_rodada", partida.Id_rodada);
-                cmd2.Parameters.AddWithValue("@gols_visitante", partida.Gols_mandante);
-                cmd2.Parameters.AddWithValue("@gols_mandante", partida.Gols_visitante);
+                cmd2.Parameters.AddWithValue("@gols_visitante", partida.Gols_visitante);
+                cmd2.Parameters.AddWithValue("@gols_mandante", partida.Gols_mandante);
                 cmd2.ExecuteNonQuery();
                 
                 var gvis = partida.Gols_visitante;
@@ -179,6 +187,14 @@ namespace ProjetoIntegrador4A.Controllers
         {
             try
             {
+                UsuarioController user = new UsuarioController();
+                bool sessao = user.validaSessao(this.Request.Headers["Authorization"]);
+
+                if (!sessao)
+                {
+                    return "Usuario nao esta logado";
+                }
+
                 List<partida> partidas = new List<partida>();
                 int varint = 0;
                 cmd.CommandText = "select p.id, p.data_hora, gols_mandante, gols_visitante, p.id_rodada, d.nome as nome_visitante , c.nome as nome_mandante, c.imagem as imagem_mandante, d.imagem as imagem_visitante from partida as p join clube as c on p.id_mandante = c.id join clube as d on p.id_visitante = d.id and id_rodada = @id_rodada";
@@ -191,7 +207,7 @@ namespace ProjetoIntegrador4A.Controllers
                     while (reader.Read())
                     {
                         varint++;
-                        partidas.Add(new partida(reader.GetInt32(0), reader.GetDateTime(1).ToString("dd/mm/yyyy hh:mm:ss"), reader.GetInt32(2), reader.GetInt32(3), reader.GetInt32(4), reader.GetString(5), reader.GetString(6), reader.GetString(7), reader.GetString(8)));
+                        partidas.Add(new partida(reader.GetInt32(0), reader.GetDateTime(1).ToString("dd/MM/yyyy HH:mm:ss"), reader.GetInt32(2), reader.GetInt32(3), reader.GetInt32(4), reader.GetString(5), reader.GetString(6), reader.GetString(7), reader.GetString(8)));
                     }
                     reader.NextResult();
                 }
