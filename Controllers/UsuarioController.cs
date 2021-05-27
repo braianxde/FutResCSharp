@@ -277,45 +277,6 @@ namespace ProjetoIntegrador4A.Controllers
             return "Nenhum usuario encontrado";
 
         }
-        //Evandro 30.08-Inserido Novo metodo mas em teste, preciso retornar atributos de apenas um item da tabela
-
-        [AcceptVerbs("GET")]
-        [Route("Consultarclubes")]
-        public String Consultarclubes()
-        {
-            try
-            {
-                List<clube> clubers = new List<clube>();
-                cmd.CommandText = "SELECT *FROM clube ";
-                cmd.Connection = conexao.conectar();
-                MySqlDataReader reader = cmd.ExecuteReader();
-
-                while (reader.HasRows)
-                {
-                    while (reader.Read())
-                    {
-                        clubers.Add(new clube(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetInt32(3), reader.GetInt32(4), reader.GetInt32(5), reader.GetInt32(6), reader.GetInt32(7), reader.GetInt32(8), reader.GetString(9), reader.GetString(10)));
-                    }
-
-                    reader.NextResult();
-                }
-
-                reader.Close();
-                return JsonConvert.SerializeObject(clubers, Formatting.Indented);
-
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-                conexao.desconectar();
-            }
-
-            return "Nenhum clube encontrado";
-
-        }
 
         public bool validaSessao( string authHeader)
         {

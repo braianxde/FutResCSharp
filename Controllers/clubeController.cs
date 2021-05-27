@@ -40,7 +40,7 @@ namespace ProjetoIntegrador4A.Controllers
                 {
                     while (reader.Read())
                     {
-                        clubers.Add(new clube(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetInt32(3), reader.GetInt32(4), reader.GetInt32(5), reader.GetInt32(6), reader.GetInt32(7), reader.GetInt32(8), reader.GetString(9), reader.GetString(10)));
+                        clubers.Add(new clube(reader.GetInt32(0), reader.GetString(1), reader.GetInt32(2), reader.GetInt32(3), reader.GetInt32(4), reader.GetInt32(5), reader.GetInt32(6), reader.GetInt32(7)));
                     }
                     reader.NextResult();
                 }
@@ -72,7 +72,7 @@ namespace ProjetoIntegrador4A.Controllers
                     return "Usuario nao esta logado";
                 }
 
-                cmd.CommandText = " update clube set pontos = @pontos, vitorias = @vitorias, derrotas = @derrotas, empates = @empates, gols_pro = @gols_pro, gols_contra = @gols_contra, nome_tecnico = @nome_tecnico where id = @id";
+                cmd.CommandText = " update clube set pontos = @pontos, vitorias = @vitorias, derrotas = @derrotas, empates = @empates, gols_pro = @gols_pro, gols_contra = @gols_contra where id = @id";
 
                 cmd.Parameters.AddWithValue("@id", clube.Id);
                 cmd.Parameters.AddWithValue("@pontos", clube.Pontos);
@@ -81,7 +81,6 @@ namespace ProjetoIntegrador4A.Controllers
                 cmd.Parameters.AddWithValue("@empates", clube.Empates);
                 cmd.Parameters.AddWithValue("@gols_pro", clube.Gols_pro);
                 cmd.Parameters.AddWithValue("@gols_contra", clube.Gols_contra);
-                cmd.Parameters.AddWithValue("@nome_tecnico", clube.Nome_tecnico);
 
                 cmd.Connection = conexao.conectar();
                 cmd.ExecuteNonQuery();
