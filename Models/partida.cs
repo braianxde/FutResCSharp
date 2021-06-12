@@ -16,15 +16,13 @@ namespace ProjetoIntegrador4A.Models
         private int id_rodada;
         private string nome_visitante;
         private string nome_mandante;
-        private string imagem_visitante;
-        private string imagem_mandante;
 
         public partida()
         {
 
         }
 
-        public partida(int id, string data_hora, int id_mandante, int id_visitante, int gols_mandante, int gols_visitante, int id_rodada, string nome_visitante, string nome_mandante, string imagem_visitante, string imagem_mandante)
+        public partida(int id, string data_hora, int id_mandante, int id_visitante, int gols_mandante, int gols_visitante, int id_rodada, string nome_visitante, string nome_mandante)
         {
             this.id = id;
             this.data_hora = data_hora;
@@ -35,11 +33,9 @@ namespace ProjetoIntegrador4A.Models
             this.id_rodada = id_rodada;
             this.nome_visitante = nome_visitante;
             this.nome_mandante = nome_mandante;
-            this.imagem_visitante = imagem_visitante;
-            this.imagem_mandante = imagem_mandante;
         }
 
-        public partida(int id, string data_hora, int gols_mandante, int gols_visitante, int id_rodada, string nome_visitante, string nome_mandante, string imagem_mandante, string imagem_visitante)
+        public partida(int id, string data_hora, int gols_mandante, int gols_visitante, int id_rodada, string nome_visitante, string nome_mandante)
         {
             this.id = id;
             this.data_hora = data_hora;
@@ -48,8 +44,6 @@ namespace ProjetoIntegrador4A.Models
             this.id_rodada = id_rodada;
             this.nome_visitante = nome_visitante;
             this.nome_mandante = nome_mandante;
-            this.imagem_visitante = imagem_visitante;
-            this.imagem_mandante = imagem_mandante;
         }
 
         public partida(int id, string data_hora, int id_mandante, int id_visitante, int gols_mandante, int gols_visitante, int id_rodada)
@@ -177,32 +171,6 @@ namespace ProjetoIntegrador4A.Models
             set
             {
                 nome_mandante = value;
-            }
-        }
-
-        public string Imagem_visitante
-        {
-            get
-            {
-                return imagem_visitante;
-            }
-
-            set
-            {
-                imagem_visitante = value;
-            }
-        }
-
-        public string Imagem_mandante
-        {
-            get
-            {
-                return imagem_mandante;
-            }
-
-            set
-            {
-                imagem_mandante = value;
             }
         }
     }

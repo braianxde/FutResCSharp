@@ -35,7 +35,7 @@ namespace ProjetoIntegrador4A.Controllers
                 MySqlCommand cmd2 = new MySqlCommand();
                 cmd2.Connection = conexao.conectar();
 
-                cmd2.CommandText = "insert into partida (id, data_hora, id_mandante, id_visitante, id_rodada, gols_visitante, gols_mandante) values (@id, STR_TO_DATE(@data_hora,'%d/%m/%Y %h:%i:%s'), @id_mandante, @id_visitante, @id_rodada, @gols_visitante, @gols_mandante)";
+                cmd2.CommandText = "insert into partida (id, data_hora, id_mandante, id_visitante, id_rodada, gols_visitante, gols_mandante) values (@id, STR_TO_DATE(@data_hora,'%d/%m/%Y %H:%i:%s'), @id_mandante, @id_visitante, @id_rodada, @gols_visitante, @gols_mandante)";
 
                 cmd2.Parameters.AddWithValue("@id", partida.Id);
                 cmd2.Parameters.AddWithValue("@data_hora", partida.Data_hora);
@@ -197,7 +197,7 @@ namespace ProjetoIntegrador4A.Controllers
 
                 List<partida> partidas = new List<partida>();
                 int varint = 0;
-                cmd.CommandText = "select p.id, p.data_hora, gols_mandante, gols_visitante, p.id_rodada, d.nome as nome_visitante , c.nome as nome_mandante, c.imagem as imagem_mandante, d.imagem as imagem_visitante from partida as p join clube as c on p.id_mandante = c.id join clube as d on p.id_visitante = d.id and id_rodada = @id_rodada";
+                cmd.CommandText = "select p.id, p.data_hora, gols_mandante, gols_visitante, p.id_rodada, d.nome as nome_visitante , c.nome as nome_mandante from partida as p join clube as c on p.id_mandante = c.id join clube as d on p.id_visitante = d.id and id_rodada = @id_rodada";
                 cmd.Parameters.AddWithValue("@id_rodada", id_rodada);
                 cmd.Connection = conexao.conectar();
                 MySqlDataReader reader = cmd.ExecuteReader();
@@ -207,7 +207,7 @@ namespace ProjetoIntegrador4A.Controllers
                     while (reader.Read())
                     {
                         varint++;
-                        partidas.Add(new partida(reader.GetInt32(0), reader.GetDateTime(1).ToString("dd/MM/yyyy HH:mm:ss"), reader.GetInt32(2), reader.GetInt32(3), reader.GetInt32(4), reader.GetString(5), reader.GetString(6), reader.GetString(7), reader.GetString(8)));
+                        partidas.Add(new partida(reader.GetInt32(0), reader.GetDateTime(1).ToString("dd/MM/yyyy HH:mm:ss"), reader.GetInt32(2), reader.GetInt32(3), reader.GetInt32(4), reader.GetString(5), reader.GetString(6)));
                     }
                     reader.NextResult();
                 }

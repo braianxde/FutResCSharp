@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MySql.Data.MySqlClient;
 using Newtonsoft.Json;
+using ProjetoIntegrador4A.Helpers;
 using ProjetoIntegrador4A.Model;
 using ProjetoIntegrador4A.Models;
 
@@ -43,11 +44,23 @@ namespace ProjetoIntegrador4A.Controllers
                 cmd.Parameters.AddWithValue("@id", usuario.Id);
                 cmd.Parameters.AddWithValue("@nome", usuario.Nome);
                 cmd.Parameters.AddWithValue("@email", usuario.Email);
+
+                usuario.Senha = EasyMD5.Hash(usuario.Senha);
+
                 cmd.Parameters.AddWithValue("@senha", usuario.Senha);
 
-                var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(usuario.Nome + usuario.Email + usuario.Senha);
-                
-                cmd.Parameters.AddWithValue("@token", System.Convert.ToBase64String(plainTextBytes).Substring(0, 49));
+                int random = new Random().Next();
+                string token = EasyMD5.Hash(usuario.Senha + random);
+                string tokenInDb = "";
+
+                if (token.Length > 50) {
+                    tokenInDb = token.Substring(0, 49);
+                } else
+                {
+                    tokenInDb = token;
+                }
+
+                cmd.Parameters.AddWithValue("@token", tokenInDb);
 
                 //SE CONECTA NO BANCO
                 cmd.Connection = conexao.conectar();
@@ -71,38 +84,46 @@ namespace ProjetoIntegrador4A.Controllers
             try
             {
 
-                cmd.CommandText = "SELECT token, contador FROM usuario where email = @email and senha = @senha";
-                cmd.Parameters.AddWithValue("@senha", usuario.Senha);
+                cmd.CommandText = "SELECT senha, contador, token FROM usuario where email = @email";
                 cmd.Parameters.AddWithValue("@email", usuario.Email);
                 cmd.Connection = conexao.conectar();
                 MySqlDataReader reader = cmd.ExecuteReader();
                 var token = "";
+                var senhaDoBanco = "";
                 var cont = 0;
+
                 while (reader.Read())
                 {
                     if (reader.GetString(0) != null)
                     {
-                        token = reader.GetString(0);
+                        senhaDoBanco = reader.GetString(0);
                         cont = reader.GetInt16(1);
+                        token = reader.GetString(2);
                     }
                 }
                 reader.Close();
 
 
                 if (token != "") {
-                    
-                    cont += 1;
 
-                    cmd.CommandText = "update usuario set contador = @contador where token = @token";
-                    cmd.Parameters.AddWithValue("@token", token);
-                    cmd.Parameters.AddWithValue("@contador", cont);
-                    cmd.Connection = conexao.conectar();
-                    cmd.ExecuteNonQuery();
-                    conexao.desconectar();
+                    var senhaCorreta = EasyMD5.Verify(usuario.Senha, senhaDoBanco);
+
+                    if (senhaCorreta) {
+                        cont += 1;
+
+                        cmd.CommandText = "update usuario set contador = @contador where token = @token";
+                        cmd.Parameters.AddWithValue("@token", token);
+                        cmd.Parameters.AddWithValue("@contador", cont);
+                        cmd.Connection = conexao.conectar();
+                        cmd.ExecuteNonQuery();
+                        conexao.desconectar();
+
+                        string[] tokenArray = { token };
+                        return JsonConvert.SerializeObject(tokenArray, Formatting.Indented);
+                    }
                 }
-                string[] tokenArray = { token };
 
-                return JsonConvert.SerializeObject(tokenArray, Formatting.Indented);
+                return JsonConvert.SerializeObject("", Formatting.Indented);
             }
             catch (Exception e)
             {

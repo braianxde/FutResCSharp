@@ -16,6 +16,12 @@ namespace ProjetoIntegrador4A.Models
             this.nome_rodada = nome_rodada;
         }
 
+        public rodada(int id, string nome_rodada)
+        {
+            this.id = id;
+            this.nome_rodada = nome_rodada;
+        }
+
         public int id { get; set; }
         public DateTime data_inicio { get; set; }
         public DateTime data_fim { get; set; }
